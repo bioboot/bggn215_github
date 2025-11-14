@@ -1,2 +1,2 @@
 # bggn215_github
-Class work for bioinformatics class at UCSD
+Class work for bioinformatics class at UC San Diego
