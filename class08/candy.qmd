@@ -1,0 +1,142 @@
+---
+title: "candy"
+format: html
+---
+
+```{r}
+library(readr)
+
+candy_file <- "candy-data.csv"
+#candy <- read_csv(candy_file)
+candy <- read.csv(candy_file)
+head(candy)
+```
+
+
+```{r}
+library(flextable)
+
+candy |>
+  head(10) |>
+  flextable()
+```
+
+
+```{r}
+library(dplyr)
+
+candy |> 
+  filter(competitorname=="Twix") |>
+  select(winpercent)
+#candy["Twix", ]$winpercent
+```
+
+```{r}
+library("skimr")
+skim(candy)
+```
+
+## Plot a histogram of winpercent values
+
+```{r}
+library(ggplot2)
+
+ggplot(candy) +
+  aes(winpercent) +
+  geom_histogram(bins=20) 
+```
+
+```{r}
+ggplot(candy) +
+  aes(winpercent)+
+  geom_density()
+```
+
+
+```{r}
+candy |>
+  filter(chocolate==1) |>
+  select(winpercent) -> win.choc
+
+candy |>
+  filter(fruity==1) |>
+  select(winpercent) -> win.fruit
+
+```
+
+```{r}
+summary(win.choc)
+summary(win.fruit)
+```
+
+```{r}
+t.test(win.choc, win.fruit)
+```
+
+
+```{r}
+ggplot(candy) + 
+  aes(winpercent, reorder(competitorname, winpercent)) +
+  geom_col()
+```
+
+```{r}
+my_cols=rep("black", nrow(candy))
+my_cols[as.logical(candy$chocolate)] = "chocolate"
+my_cols[as.logical(candy$bar)] = "brown"
+my_cols[as.logical(candy$fruity)] = "pink"
+```
+
+```{r}
+ggplot(candy) + 
+  aes(winpercent, reorder(competitorname, winpercent)) +
+  geom_col(fill=my_cols)
+```
+
+```{r}
+library(ggrepel)
+
+ggplot(candy) +
+  aes(winpercent, pricepercent, label=competitorname) +
+  geom_point(col=my_cols) + 
+  geom_text_repel(col=my_cols, size=3.3, max.overlaps = 5)
+```
+
+```{r}
+library(corrplot)
+
+cij <- cor(candy[,-1])
+corrplot(cij)
+```
+
+
+```{r}
+pca <- prcomp(candy[,-1], scale=T)
+summary(pca)
+```
+
+```{r}
+
+p <- ggplot(pca$x) +
+  aes(PC1, PC2, label=candy$competitorname) +
+  geom_point(col=my_cols) 
+
+p + geom_text_repel(size=3.3, col=my_cols, max.overlaps = 7)
+
+
+```
+
+```{r}
+library(plotly)
+
+ggplotly(p)
+```
+
+```{r}
+#pca$rotation
+
+ggplot(pca$rotation) +
+  aes(PC1, rownames(pca$rotation)) +
+  geom_col()
+```
+

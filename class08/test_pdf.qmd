@@ -1,0 +1,48 @@
+---
+title: "Test conditional output"
+format: html
+---
+
+```{r}
+library(bio3d)
+library(bio3dview)
+
+p <- read.pdb("5p21")
+```
+
+::: {.content-visible when-format="html"}
+```{r}
+# HTML-only content with NGLViewer
+# Your widget code
+view.pdb(p)
+```
+:::
+
+
+::: {.content-visible when-format="pdf"}
+```{r}
+# Alternative for PDF
+# Interactive view available in HTML output
+p  # Static alternative
+```
+:::
+
+
+An alternative way:
+
+```{r}
+display3d <- function(data, ...) {
+  if(knitr::is_latex_output()) {
+    message("3D molecular visualization available in HTML version")
+  } else {
+    view.pdb(data, ...)
+  }
+}
+
+
+```
+
+```{r}
+display3d(p)
+```
+

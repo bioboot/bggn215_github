@@ -1,0 +1,141 @@
+---
+title: "Class 08: Breast Cancer Analysis Project"
+author: "Barry (PID: 911)"
+format: pdf
+toc: true
+---
+
+## Background
+
+The goal of todays mini-project is to explore a complete analysis using the unsupervised learning techniques covered in the last class. We will extend what we learned by combining PCA as a preprocessing step to clustering using data that consist of measurements of cell nuclei of human breast masses.
+
+The data itself comes from the Wisconsin Breast Cancer Diagnostic Data Set first reported by K. P. Benne and O. L. Mangasarian: “Robust Linear Programming Discrimination of Two Linearly Inseparable Sets”.
+
+Values in this data set describe characteristics of the cell nuclei present in digitized images of a fine needle aspiration (FNA) of a breast mass.
+
+
+## Data import
+
+The data is available as a CSV from the class website:
+
+```{r}
+wisc.df <- read.csv("WisconsinCancer.csv", row.names = 1)
+```
+
+Make sure we do not include sample id or diagnosis columns in the data that we analyze below.
+
+```{r}
+diagnosis <- as.factor(wisc.df$diagnosis)
+wisc.data <- wisc.df[, -1]
+dim(wisc.data)
+```
+
+```{r}
+head(wisc.data)
+```
+
+## Exploratory data analysis
+
+> Q1. How many observations are in this dataset?
+
+There are `r nrow(wisc.data)` observations/samples/patients in the data set.
+
+
+> Q2. How many of the observations have a malignant diagnosis?
+
+```{r}
+sum(wisc.df$diagnosis == "M")
+```
+```{r}
+table(wisc.df$diagnosis)
+```
+
+
+> Q3. How many variables/features in the data are suffixed with _mean?
+
+```{r}
+#colnames(wisc.data)
+length( grep("_mean", colnames(wisc.data)) )
+```
+```{r}
+n <- colnames(wisc.data)
+inds <- grep("_mean", n)
+length(inds)
+```
+
+## Principal Component Analysis
+
+The main function in base R for PCA is called `prcomp()`. A optional argument `scale` should nearly always be switched to `scale=TRUE` for this function.
+
+```{r}
+wisc.pr <- prcomp(wisc.data, scale=TRUE)
+summary(wisc.pr)
+```
+
+Let's make our main result figure - the "PC plot" or "score plot", "ordienation plot"...
+
+
+```{r}
+library(ggplot2)
+
+ggplot(wisc.pr$x) +
+  aes(PC1, PC2, col=diagnosis) +
+  geom_point()
+```
+
+
+> Q4. From your results, what proportion of the original variance is captured by the first principal components (PC1)?
+
+```{r}
+pr.var <- wisc.pr$sdev^2
+pr.var / sum(pr.var) 
+```
+
+
+> Q5. How many principal components (PCs) are required to describe at least 70% of the original variance in the data?
+
+> Q6. How many principal components (PCs) are required to describe at least 90% of the original variance in the data?
+
+
+## Hierarchical clustering
+
+```{r}
+apply(scale(wisc.data), 2, sd)
+```
+
+
+
+```{r}
+d <- dist(scale(wisc.data))
+h <- hclust(d)
+plot(h)
+```
+
+# Combining PCA and clustering
+
+```{r}
+d <- dist( wisc.pr$x[,1:3] )
+wisc.pr.hclust <- hclust(d, method="ward.D2")
+plot(wisc.pr.hclust)
+abline(h=70, col="red")
+```
+
+Get my cluster membership vector
+```{r}
+grps <- cutree(wisc.pr.hclust, h=70)
+table(grps)
+```
+```{r}
+table(diagnosis)
+```
+Make a wee "cross-table"
+
+```{r}
+table(grps, diagnosis)
+```
+TP: 179
+FP: 24
+
+Sensitivity: TP/(TP+FN)
+
+

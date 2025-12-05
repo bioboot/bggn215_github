@@ -1,0 +1,178 @@
+---
+title: "tmp"
+format: typst
+---
+
+We will need the packages 
+
+readr
+bio3d
+bio3dview
+NGLVieweR
+
+```{r}
+library(readr)
+library(flextable)
+
+stats <- read_csv("~/Downloads/Data Export Summary.csv")
+flextable(stats)
+```
+
+> Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+sum(stats$`X-ray`) / sum(stats$Total)
+```
+```{r}
+sum(stats$EM) / sum(stats$Total)
+
+```
+```{r}
+totals <- colSums(stats[,-1])
+round(totals/totals["Total"] * 100, 2)
+```
+
+> Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+stats[1,"Total"] / totals["Total"]
+```
+
+```{r}
+library(dplyr)
+library(stringr)
+
+prot_stats <- stats |> 
+  #filter(`Molecular Type` == "Protein (only)")
+  filter(str_detect(`Molecular Type`, "Protein")) |>
+  select(`Molecular Type`, Total)
+
+prot_stats
+```
+
+```{r}
+prot_stats |>
+  select(Total) / totals["Total"]
+
+```
+
+```{r}
+prot_stats |>
+  select(Total) |>
+  sum() / totals["Total"]
+```
+
+```{r}
+library(bio3d)
+
+pdb <- read.pdb("1hsg")
+pdb
+```
+
+```{r}
+library(bio3dview)
+
+#view.pdb(pdb)
+```
+
+```{r}
+#| label: blast-search1
+#| cache: true
+
+blast <- blast.pdb( pdbseq(pdb) )
+hits <- plot(blast)
+```
+
+```{r}
+#blast$hit.tbl
+```
+
+```{r}
+#| label: blast-search2
+#| cache: true
+
+chainA_seq <- pdbseq(pdb, inds=atom.select(pdb, chain="A", elety="CA"))
+chainA_blast <- blast.pdb( chainA_seq )
+chainA_hits <- plot(chainA_blast)
+```
+
+```{r}
+if (knitr::is_html_output()) {
+  #rmarkdown::paged_table(chainA_blast$hit.tbl)
+  view.pdb(pdb)
+} else {
+  library(flextable)
+  flextable(chainA_blast$hit.tbl) %>% theme_booktabs()
+}
+```
+
+
+
+```{r}
+rmarkdown::paged_table(chainA_blast$hit.tbl)
+```
+
+
+```{r}
+if (knitr::is_html_output()) {
+library(reactable)
+
+reactable(
+  chainA_blast$hit.tbl,
+  defaultPageSize = 10,
+  pageSizeOptions = c(5, 10, 25, 50),
+  searchable = TRUE,
+  sortable = TRUE,
+  striped = TRUE,
+  highlight = TRUE,
+  bordered = TRUE
+)
+}
+```
+
+
+```{r}
+head(chainA_blast$hit.tbl)
+```
+```{r}
+head(pdb$atom, 15)
+```
+
+```{r}
+#sele <- atom.select(pdb, resno=25)
+
+# and highlight them in spacefill representation
+#view.pdb(pdb, cols=c("navy","teal"), 
+#         highlight = sele,
+#         highlight.style = "spacefill")
+```
+
+```{r}
+
+library(flextable)
+
+my_table <- stats %>%
+  flextable() %>%
+  theme_booktabs() %>%
+  autofit() %>%
+  set_caption("Table 1: Summary Statistics")
+
+my_table
+```
+
+```{r}
+my_table <- chainA_blast$hit.tbl |>
+  select(subjectids, identity, alignmentlength, mlog.evalue, bitscore) |>
+  flextable() |>
+  theme_booktabs() |>
+  autofit() |>
+  set_caption("Table 1: BLAST results")
+
+my_table
+```
+
+```{r}
+flextable(chainA_blast$hit.tbl) |>
+  theme_booktabs()
+```
+

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>candy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="candy_files/libs/clipboard/clipboard.min.js"></script>
+<script src="candy_files/libs/quarto-html/quarto.js"></script>
+<script src="candy_files/libs/quarto-html/popper.min.js"></script>
+<script src="candy_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="candy_files/libs/quarto-html/anchor.min.js"></script>
+<link href="candy_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="candy_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="candy_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="candy_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="candy_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="candy_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="candy_files/libs/tabwid-1.1.3/tabwid.js"></script>
+<link href="candy_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="candy_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="candy_files/libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="candy_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="candy_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="candy_files/libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="candy_files/libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="candy_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="candy_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">candy</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>candy_file <span class="ot">&lt;-</span> <span class="st">"candy-data.csv"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#candy &lt;- read_csv(candy_file)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>candy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(candy_file)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(candy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  competitorname chocolate fruity caramel peanutyalmondy nougat
+1      100 Grand         1      0       1              0      0
+2   3 Musketeers         1      0       0              0      1
+3       One dime         0      0       0              0      0
+4    One quarter         0      0       0              0      0
+5      Air Heads         0      1       0              0      0
+6     Almond Joy         1      0       0              1      0
+  crispedricewafer hard bar pluribus sugarpercent pricepercent winpercent
+1                1    0   1        0        0.732        0.860   66.97173
+2                0    0   1        0        0.604        0.511   67.60294
+3                0    0   0        0        0.011        0.116   32.26109
+4                0    0   0        0        0.011        0.511   46.11650
+5                0    0   0        0        0.906        0.511   52.34146
+6                0    0   1        0        0.465        0.767   50.34755</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>candy <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-f34da6e6{}.cl-f34ae91a{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-f34c223a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f34c223b{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f34c2b9a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f34c2b9b{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f34c2b9c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f34c2b9d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f34c2b9e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f34c2b9f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-f34da6e6"><thead><tr style="overflow-wrap:break-word;"><th class="cl-f34c2b9a"><p class="cl-f34c223a"><span class="cl-f34ae91a">competitorname</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">chocolate</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">fruity</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">caramel</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">peanutyalmondy</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">nougat</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">crispedricewafer</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">hard</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">bar</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">pluribus</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">sugarpercent</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">pricepercent</span></p></th><th class="cl-f34c2b9b"><p class="cl-f34c223b"><span class="cl-f34ae91a">winpercent</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">100 Grand</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.732</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.860</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">66.97173</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">3 Musketeers</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.604</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.511</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">67.60294</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">One dime</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.011</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.116</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">32.26109</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">One quarter</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.011</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.511</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">46.11650</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">Air Heads</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.906</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.511</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">52.34146</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">Almond Joy</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.465</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.767</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">50.34755</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">Baby Ruth</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.604</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.767</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">56.91455</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">Boston Baked Beans</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.313</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.511</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">23.41782</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9c"><p class="cl-f34c223a"><span class="cl-f34ae91a">Candy Corn</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.906</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.325</span></p></td><td class="cl-f34c2b9d"><p class="cl-f34c223b"><span class="cl-f34ae91a">38.01096</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34c2b9e"><p class="cl-f34c223a"><span class="cl-f34ae91a">Caramel Apple Pops</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">1</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.604</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">0.325</span></p></td><td class="cl-f34c2b9f"><p class="cl-f34c223b"><span class="cl-f34ae91a">34.51768</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>candy <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(competitorname<span class="sc">==</span><span class="st">"Twix"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(winpercent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  winpercent
+1   81.64291</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#candy["Twix", ]$winpercent</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"skimr"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(candy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">candy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">85</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">competitorname</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">chocolate</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.44</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▆</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fruity</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▆</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">caramel</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">peanutyalmondy</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">nougat</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">crispedricewafer</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hard</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bar</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pluribus</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sugarpercent</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.48</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">0.73</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: left;">▇▇▇▇▆</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pricepercent</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">0.98</td>
+<td style="text-align: left;">▇▇▇▇▆</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">winpercent</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">50.32</td>
+<td style="text-align: right;">14.71</td>
+<td style="text-align: right;">22.45</td>
+<td style="text-align: right;">39.14</td>
+<td style="text-align: right;">47.83</td>
+<td style="text-align: right;">59.86</td>
+<td style="text-align: right;">84.18</td>
+<td style="text-align: left;">▃▇▆▅▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="plot-a-histogram-of-winpercent-values" class="level2">
+<h2 class="anchored" data-anchor-id="plot-a-histogram-of-winpercent-values">Plot a histogram of winpercent values</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(candy) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(winpercent) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="candy_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(candy) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(winpercent)<span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="candy_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>candy <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(chocolate<span class="sc">==</span><span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(winpercent) <span class="ot">-&gt;</span> win.choc</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>candy <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fruity<span class="sc">==</span><span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(winpercent) <span class="ot">-&gt;</span> win.fruit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(win.choc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   winpercent   
+ Min.   :34.72  
+ 1st Qu.:50.35  
+ Median :60.80  
+ Mean   :60.92  
+ 3rd Qu.:70.74  
+ Max.   :84.18  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(win.fruit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   winpercent   
+ Min.   :22.45  
+ 1st Qu.:39.04  
+ Median :42.97  
+ Mean   :44.12  
+ 3rd Qu.:52.11  
+ Max.   :67.04  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(win.choc, win.fruit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  win.choc and win.fruit
+t = 6.2582, df = 68.882, p-value = 2.871e-08
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 11.44563 22.15795
+sample estimates:
+mean of x mean of y 
+ 60.92153  44.11974 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(candy) <span class="sc">+</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(winpercent, <span class="fu">reorder</span>(competitorname, winpercent)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="candy_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>my_cols<span class="ot">=</span><span class="fu">rep</span>(<span class="st">"black"</span>, <span class="fu">nrow</span>(candy))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>my_cols[<span class="fu">as.logical</span>(candy<span class="sc">$</span>chocolate)] <span class="ot">=</span> <span class="st">"chocolate"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>my_cols[<span class="fu">as.logical</span>(candy<span class="sc">$</span>bar)] <span class="ot">=</span> <span class="st">"brown"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>my_cols[<span class="fu">as.logical</span>(candy<span class="sc">$</span>fruity)] <span class="ot">=</span> <span class="st">"pink"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(candy) <span class="sc">+</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(winpercent, <span class="fu">reorder</span>(competitorname, winpercent)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill=</span>my_cols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="candy_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(candy) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(winpercent, pricepercent, <span class="at">label=</span>competitorname) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">col=</span>my_cols) <span class="sc">+</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">col=</span>my_cols, <span class="at">size=</span><span class="fl">3.3</span>, <span class="at">max.overlaps =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: ggrepel: 50 unlabeled data points (too many overlaps). Consider
+increasing max.overlaps</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="candy_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>corrplot 0.95 loaded</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cij <span class="ot">&lt;-</span> <span class="fu">cor</span>(candy[,<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(cij)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="candy_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(candy[,<span class="sc">-</span><span class="dv">1</span>], <span class="at">scale=</span>T)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Importance of components:
+                          PC1    PC2    PC3     PC4    PC5     PC6     PC7
+Standard deviation     2.0788 1.1378 1.1092 1.07533 0.9518 0.81923 0.81530
+Proportion of Variance 0.3601 0.1079 0.1025 0.09636 0.0755 0.05593 0.05539
+Cumulative Proportion  0.3601 0.4680 0.5705 0.66688 0.7424 0.79830 0.85369
+                           PC8     PC9    PC10    PC11    PC12
+Standard deviation     0.74530 0.67824 0.62349 0.43974 0.39760
+Proportion of Variance 0.04629 0.03833 0.03239 0.01611 0.01317
+Cumulative Proportion  0.89998 0.93832 0.97071 0.98683 1.00000</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pca<span class="sc">$</span>x) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(PC1, PC2, <span class="at">label=</span>candy<span class="sc">$</span>competitorname) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">col=</span>my_cols) </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_text_repel</span>(<span class="at">size=</span><span class="fl">3.3</span>, <span class="at">col=</span>my_cols, <span class="at">max.overlaps =</span> <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: ggrepel: 35 unlabeled data points (too many overlaps). Consider
+increasing max.overlaps</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="candy_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'plotly'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    last_plot</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:flextable':
+
+    highlight, style</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:graphics':
+
+    layout</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-c6e4408c747852ae7684" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c6e4408c747852ae7684">{"x":{"data":[{"x":[-3.8198617450338843,-2.796023639502311,1.2025836315339851,0.44865377872929812,0.70289922101263713,-2.4683383374455459,-4.1053122278249043,0.7138581291187982,1.0135720412682276,0.81049644709198387,-2.1543658740121496,1.6526848199515001,2.3818081662045825,1.5124993621205076,2.1443093258381696,2.2613376304884412,1.8238334838391497,1.9604781160418949,1.3336074637748305,1.1116736451286775,1.4615295226573093,1.6684901647770942,0.37722674851876531,-3.0478835644961526,-2.1169641707883966,-2.1785037562027108,2.6249158673699671,-0.16010609998878444,-2.8708654644150085,1.6545004188042896,2.3356469520707219,1.1952876648295458,-1.5222381444208097,-0.76747560629035982,1.5748729015402911,-0.76836937030615693,-3.6927221838214153,-3.2303651268152205,-3.049362263180813,-1.8129279465958619,-2.6732784917460668,1.934268949348291,-2.9785508125316511,-2.927404876023973,1.6398527213514755,1.9807098230419486,-2.39180556077411,-1.3889706898085166,1.6704222745082384,1.7687934829190715,2.1240684877673299,-1.5521025097162933,-2.2842798483348701,-1.4059076089204245,-2.1338239828456738,1.1927441238739043,-1.6125932233170033,2.1044025437438414,2.2569918487530449,0.8179966434964735,1.292591285378444,1.4714851736125274,-0.27556562513355526,2.6011521390625951,-4.3957679187957561,-4.0145733479370387,1.8155176864056173,1.9732666039236579,1.5065849329187218,2.806478373376208,-0.019005588740837635,0.19642038204205953,1.9924282012383747,1.0054740661616892,0.84734171246031065,-0.4046366653732783,0.6673073238962739,-1.3114984201784632,1.8504845635693903,-4.1290904398299499,1.5631258385733799,2.3070703300449926,1.84808800952644,0.68420363241620319,-1.4254955249731811],"y":[-0.59357876699127643,-1.519606211149072,0.17181206565384505,0.45197356214955736,-0.57313432631884254,0.70355011200464312,-2.1000967736149874,1.2098216536797468,0.2834319621193005,-1.6960889498264951,-1.930421303734033,0.072643494363970149,0.44309260707365145,0.16239585915287139,-1.8388386159706922,0.58183225199365052,-1.7828662094011676,-1.0584680266894799,0.5892699920908705,0.62576978075165746,0.50736914823009427,0.37486462646383178,1.5654519145146018,0.6850792787081188,0.25045688907749464,0.28985700521309415,-0.63436716178127717,1.6194428346907135,0.90696553350406894,-0.23796051440694771,-1.2553404646305242,-0.078361024580046248,1.9291395889858942,1.2573539135514678,0.066425974582050684,0.41927939455434043,-2.4933313172941665,-2.8201031326663251,-1.1774777304496822,0.2120726312239031,0.92172073441268254,-0.91333072245627844,0.87988353679582798,0.81190131536810239,0.42102173223310313,0.51171509192833153,-1.4839637512176771,2.0947188031081168,0.89697923645045885,-0.80603256401222734,0.1366822959708891,1.9287569792771291,1.4648923293464831,2.3077984818203512,1.0787289653625396,-1.7069749283502245,0.17737349316927192,-0.87113405557911139,-1.1223199933908521,1.1888290122000171,0.22637051370533665,0.11183545590606284,1.3792344137274375,-0.6047947520490895,-1.7919312516198178,-0.034767352242761208,0.8879445215215851,0.78694732388641531,0.94372908300374247,-1.0331193111443178,-0.82195422930654616,-1.2073694698280579,-0.391589864765994,0.50033270400461061,-1.1060686710295204,0.58485803620256505,1.3709464979822494,0.00097212857499548205,0.53040551680395587,-0.21802995732966426,-0.17945883538682741,-1.2940268824869618,0.50220061837795893,-2.0146385440068366,1.3654147702341166],"text":["PC1: -3.81986175<br />PC2: -0.5935787670<br />candy$competitorname: 100 Grand","PC1: -2.79602364<br />PC2: -1.5196062111<br />candy$competitorname: 3 Musketeers","PC1:  1.20258363<br />PC2:  0.1718120657<br />candy$competitorname: One dime","PC1:  0.44865378<br />PC2:  0.4519735621<br />candy$competitorname: One quarter","PC1:  0.70289922<br />PC2: -0.5731343263<br />candy$competitorname: Air Heads","PC1: -2.46833834<br />PC2:  0.7035501120<br />candy$competitorname: Almond Joy","PC1: -4.10531223<br />PC2: -2.1000967736<br />candy$competitorname: Baby Ruth","PC1:  0.71385813<br />PC2:  1.2098216537<br />candy$competitorname: Boston Baked Beans","PC1:  1.01357204<br />PC2:  0.2834319621<br />candy$competitorname: Candy Corn","PC1:  0.81049645<br />PC2: -1.6960889498<br />candy$competitorname: Caramel Apple Pops","PC1: -2.15436587<br />PC2: -1.9304213037<br />candy$competitorname: Charleston Chew","PC1:  1.65268482<br />PC2:  0.0726434944<br />candy$competitorname: Chewey Lemonhead Fruit Mix","PC1:  2.38180817<br />PC2:  0.4430926071<br />candy$competitorname: Chiclets","PC1:  1.51249936<br />PC2:  0.1623958592<br />candy$competitorname: Dots","PC1:  2.14430933<br />PC2: -1.8388386160<br />candy$competitorname: Dum Dums","PC1:  2.26133763<br />PC2:  0.5818322520<br />candy$competitorname: Fruit Chews","PC1:  1.82383348<br />PC2: -1.7828662094<br />candy$competitorname: Fun Dip","PC1:  1.96047812<br />PC2: -1.0584680267<br />candy$competitorname: Gobstopper","PC1:  1.33360746<br />PC2:  0.5892699921<br />candy$competitorname: Haribo Gold Bears","PC1:  1.11167365<br />PC2:  0.6257697808<br />candy$competitorname: Haribo Happy Cola","PC1:  1.46152952<br />PC2:  0.5073691482<br />candy$competitorname: Haribo Sour Bears","PC1:  1.66849016<br />PC2:  0.3748646265<br />candy$competitorname: Haribo Twin Snakes","PC1:  0.37722675<br />PC2:  1.5654519145<br />candy$competitorname: Hershey's Kisses","PC1: -3.04788356<br />PC2:  0.6850792787<br />candy$competitorname: Hershey's Krackel","PC1: -2.11696417<br />PC2:  0.2504568891<br />candy$competitorname: Hershey's Milk Chocolate","PC1: -2.17850376<br />PC2:  0.2898570052<br />candy$competitorname: Hershey's Special Dark","PC1:  2.62491587<br />PC2: -0.6343671618<br />candy$competitorname: Jawbusters","PC1: -0.16010610<br />PC2:  1.6194428347<br />candy$competitorname: Junior Mints","PC1: -2.87086546<br />PC2:  0.9069655335<br />candy$competitorname: Kit Kat","PC1:  1.65450042<br />PC2: -0.2379605144<br />candy$competitorname: Laffy Taffy","PC1:  2.33564695<br />PC2: -1.2553404646<br />candy$competitorname: Lemonhead","PC1:  1.19528766<br />PC2: -0.0783610246<br />candy$competitorname: Lifesavers big ring gummies","PC1: -1.52223814<br />PC2:  1.9291395890<br />candy$competitorname: Peanut butter M&M's","PC1: -0.76747561<br />PC2:  1.2573539136<br />candy$competitorname: M&M's","PC1:  1.57487290<br />PC2:  0.0664259746<br />candy$competitorname: Mike & Ike","PC1: -0.76836937<br />PC2:  0.4192793946<br />candy$competitorname: Milk Duds","PC1: -3.69272218<br />PC2: -2.4933313173<br />candy$competitorname: Milky Way","PC1: -3.23036513<br />PC2: -2.8201031327<br />candy$competitorname: Milky Way Midnight","PC1: -3.04936226<br />PC2: -1.1774777304<br />candy$competitorname: Milky Way Simply Caramel","PC1: -1.81292795<br />PC2:  0.2120726312<br />candy$competitorname: Mounds","PC1: -2.67327849<br />PC2:  0.9217207344<br />candy$competitorname: Mr Good Bar","PC1:  1.93426895<br />PC2: -0.9133307225<br />candy$competitorname: Nerds","PC1: -2.97855081<br />PC2:  0.8798835368<br />candy$competitorname: Nestle Butterfinger","PC1: -2.92740488<br />PC2:  0.8119013154<br />candy$competitorname: Nestle Crunch","PC1:  1.63985272<br />PC2:  0.4210217322<br />candy$competitorname: Nik L Nip","PC1:  1.98070982<br />PC2:  0.5117150919<br />candy$competitorname: Now & Later","PC1: -2.39180556<br />PC2: -1.4839637512<br />candy$competitorname: Payday","PC1: -1.38897069<br />PC2:  2.0947188031<br />candy$competitorname: Peanut M&Ms","PC1:  1.67042227<br />PC2:  0.8969792365<br />candy$competitorname: Pixie Sticks","PC1:  1.76879348<br />PC2: -0.8060325640<br />candy$competitorname: Pop Rocks","PC1:  2.12406849<br />PC2:  0.1366822960<br />candy$competitorname: Red vines","PC1: -1.55210251<br />PC2:  1.9287569793<br />candy$competitorname: Reese's Miniatures","PC1: -2.28427985<br />PC2:  1.4648923293<br />candy$competitorname: Reese's Peanut Butter cup","PC1: -1.40590761<br />PC2:  2.3077984818<br />candy$competitorname: Reese's pieces","PC1: -2.13382398<br />PC2:  1.0787289654<br />candy$competitorname: Reese's stuffed with pieces","PC1:  1.19274412<br />PC2: -1.7069749284<br />candy$competitorname: Ring pop","PC1: -1.61259322<br />PC2:  0.1773734932<br />candy$competitorname: Rolo","PC1:  2.10440254<br />PC2: -0.8711340556<br />candy$competitorname: Root Beer Barrels","PC1:  2.25699185<br />PC2: -1.1223199934<br />candy$competitorname: Runts","PC1:  0.81799664<br />PC2:  1.1888290122<br />candy$competitorname: Sixlets","PC1:  1.29259129<br />PC2:  0.2263705137<br />candy$competitorname: Skittles original","PC1:  1.47148517<br />PC2:  0.1118354559<br />candy$competitorname: Skittles wildberry","PC1: -0.27556563<br />PC2:  1.3792344137<br />candy$competitorname: Nestle Smarties","PC1:  2.60115214<br />PC2: -0.6047947520<br />candy$competitorname: Smarties candy","PC1: -4.39576792<br />PC2: -1.7919312516<br />candy$competitorname: Snickers","PC1: -4.01457335<br />PC2: -0.0347673522<br />candy$competitorname: Snickers Crisper","PC1:  1.81551769<br />PC2:  0.8879445215<br />candy$competitorname: Sour Patch Kids","PC1:  1.97326660<br />PC2:  0.7869473239<br />candy$competitorname: Sour Patch Tricksters","PC1:  1.50658493<br />PC2:  0.9437290830<br />candy$competitorname: Starburst","PC1:  2.80647837<br />PC2: -1.0331193111<br />candy$competitorname: Strawberry bon bons","PC1: -0.01900559<br />PC2: -0.8219542293<br />candy$competitorname: Sugar Babies","PC1:  0.19642038<br />PC2: -1.2073694698<br />candy$competitorname: Sugar Daddy","PC1:  1.99242820<br />PC2: -0.3915898648<br />candy$competitorname: Super Bubble","PC1:  1.00547407<br />PC2:  0.5003327040<br />candy$competitorname: Swedish Fish","PC1:  0.84734171<br />PC2: -1.1060686710<br />candy$competitorname: Tootsie Pop","PC1: -0.40463667<br />PC2:  0.5848580362<br />candy$competitorname: Tootsie Roll Juniors","PC1:  0.66730732<br />PC2:  1.3709464980<br />candy$competitorname: Tootsie Roll Midgies","PC1: -1.31149842<br />PC2:  0.0009721286<br />candy$competitorname: Tootsie Roll Snack Bars","PC1:  1.85048456<br />PC2:  0.5304055168<br />candy$competitorname: Trolli Sour Bites","PC1: -4.12909044<br />PC2: -0.2180299573<br />candy$competitorname: Twix","PC1:  1.56312584<br />PC2: -0.1794588354<br />candy$competitorname: Twizzlers","PC1:  2.30707033<br />PC2: -1.2940268825<br />candy$competitorname: Warheads","PC1:  1.84808801<br />PC2:  0.5022006184<br />candy$competitorname: Welch's Fruit Snacks","PC1:  0.68420363<br />PC2: -2.0146385440<br />candy$competitorname: Werther's Original Caramel","PC1: -1.42549552<br />PC2:  1.3654147702<br />candy$competitorname: Whoppers"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":["rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(210,105,30,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(0,0,0,1)","rgba(210,105,30,1)"],"opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":["rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(210,105,30,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(210,105,30,1)","rgba(210,105,30,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(165,42,42,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(255,192,203,1)","rgba(0,0,0,1)","rgba(210,105,30,1)"]}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":37.260273972602747},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-4.755880233404354,3.1665906879848063],"tickmode":"array","ticktext":["-2.5","0.0","2.5"],"tickvals":[-2.5,0,2.5],"categoryorder":"array","categoryarray":["-2.5","0.0","2.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"PC1","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-3.0764982133906589,2.564193562544685],"tickmode":"array","ticktext":["-3","-2","-1","0","1","2"],"tickvals":[-3,-2,-1,0,1,2],"categoryorder":"array","categoryarray":["-3","-2","-1","0","1","2"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"PC2","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"2cac3a087d90":{"x":{},"y":{},"label":{},"type":"scatter"}},"cur_data":"2cac3a087d90","visdat":{"2cac3a087d90":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pca$rotation</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pca<span class="sc">$</span>rotation) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(PC1, <span class="fu">rownames</span>(pca<span class="sc">$</span>rotation)) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="candy_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

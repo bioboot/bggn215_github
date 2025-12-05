@@ -1,0 +1,202 @@
+---
+title: "tmp2"
+format: html
+---
+
+Example worflow for lab 9  
+
+
+```{r}
+#| message: false
+
+library(readr)
+library(dplyr)
+library(flextable)
+
+stats <- read_csv("~/Downloads/Data Export Summary.csv")
+
+stats |> 
+  select(-Other, -Neutron) |> 
+  flextable()
+```
+
+> Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+sum(stats$`X-ray`) / sum(stats$Total)
+```
+
+and for EM
+
+```{r}
+sum(stats$EM) / sum(stats$Total)
+```
+
+> Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+# Just Protein
+stats$Total[1] / sum(stats$Total)
+```
+
+```{r}
+
+inds <- grep("protein", stats$`Molecular Type`, ignore.case = T)
+sum(stats[inds,"Total"]) / sum(stats$Total)
+```
+
+```{r}
+library(dplyr)
+library(stringr)
+
+stats |> 
+  filter( str_detect(`Molecular Type`, "Protein") ) |>
+  select(Total)
+```
+
+```{r}
+# returns a logical vector
+grepl("Protein", stats$`Molecular Type`)
+```
+
+```{r}
+stats |> 
+  filter( grepl("Protein", stats$`Molecular Type`) ) |>
+  select(Total)
+```
+
+
+## Some bio3d work
+
+```{r}
+library(bio3d)
+library(bio3dview)
+
+pdb <- read.pdb("1hsg")
+```
+
+```{r}
+v <- view.pdb(pdb)
+
+if (knitr::is_html_output()) {
+  v
+} else {
+  f <- view2png(v, autocrop=T)
+  knitr::include_graphics(f) 
+}
+
+```
+
+```{r}
+sel <- atom.select(pdb, resno=25)
+
+view.pdb(pdb, 
+         highlight = sel, highlight.style = "spacefill",
+         colorScheme = "chain", 
+         cols=c("orange","red"), 
+         backgroundColor = "pink")
+```
+
+```{r}
+pdb |> 
+  trim.pdb(chain="A")
+```
+
+```{r}
+pdb |> 
+  trim.pdb(chain="A") |>
+  pdbseq() -> chainA_seq
+```
+
+```{r, blast_search, cache=TRUE}
+blast <- blast.pdb(chainA_seq)
+
+head(blast$hit.tbl)
+```
+
+```{r}
+blast$hit.tbl |>
+  select(subjectids, identity, alignmentlength, mlog.evalue) |>
+  head(10)
+```
+```{r}
+hits <- plot(blast)
+```
+
+```{r}
+library(pheatmap)
+pheatmap( dist( blast$hit.tbl$mlog.evalue ) )
+```
+
+```{r}
+aa <- get.seq("1ake_A")
+```
+
+```{r, blast_search2, cache=TRUE}
+b <- blast.pdb(aa)
+hits <- plot(b)
+```
+
+```{r, download_pdbs, cache=TRUE}
+# Download releated PDB files
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
+```{r}
+# Align releated PDBs
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+```
+
+```{r}
+pdbs
+```
+
+```{r}
+pc.xray <- pca(pdbs)
+```
+
+```{r}
+plot(pc.xray)
+```
+
+
+```{r}
+# Calculate RMSD
+rd <- rmsd(pdbs)
+
+# Structure-based clustering
+hc.rd <- hclust(dist(rd))
+grps.rd <- cutree(hc.rd, k=3)
+
+plot(pc.xray, 1:2, col="grey50", bg=grps.rd, pch=21, cex=1)
+```
+
+
+```{r}
+pc1 <- mktrj(pc.xray, pc=1, file="pc_1.pdb")
+```
+
+```{r}
+#Plotting results with ggplot2
+library(ggplot2)
+library(ggrepel)
+
+ids <- sub(".pdb", "", basename(pdbs$id))
+
+df <- data.frame(PC1=pc.xray$z[,1], 
+                 PC2=pc.xray$z[,2], 
+                 col=as.factor(grps.rd),
+                 ids=ids)
+
+p <- ggplot(df) + 
+  aes(PC1, PC2, col=col, label=ids) +
+  geom_point(size=2) +
+  geom_text_repel(max.overlaps = 20) +
+  theme(legend.position = "none")
+p
+```
+
+```{r}
+view.pca(pc.xray)
+```
+
