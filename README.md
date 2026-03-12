@@ -14,4 +14,10 @@ Class work for bioinformatics class [BGGN213 at UC San Diego](https://bioboot.gi
 
 - Class 08: [Unsupervised learning mini-project](class08/class08.md)
 
-- some silly txt
+- Class 09: [Structural Bioinformatics pt 1.](class09/class09.md)
+
+- Class 10: [Candy project](class10/class10.md)
+
+- Class 11: [some silly txt](class09/class09.html)
+
+- etc. for 20 classes
